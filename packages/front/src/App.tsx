@@ -1,11 +1,20 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { useRequest } from "ahooks";
+import axios from "axios";
+import type { HelloResponse } from "contract";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [msg, setMsg] = useState<string>("Hello Vite + React!");
 
+  const { run, loading } = useRequest(
+    async (): Promise<HelloResponse> => {
+      return (await axios.get("/api/hello")).data;
+    },
+    { manual: true, onSuccess: (data) => setMsg(data.message) },
+  );
   return (
     <>
       <div>
@@ -18,8 +27,8 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button disabled={!loading} onClick={() => run}>
+          Remote Message is {msg}
         </button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
@@ -29,7 +38,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

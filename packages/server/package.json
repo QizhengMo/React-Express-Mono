@@ -4,8 +4,9 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "dev" : "nodemon"
+    "dev": "nodemon"
   },
+  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -15,8 +16,11 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "@types/node": "^24.0.13",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "contract": "workspace:*"
   },
   "nodemonConfig": {
     "watch": [

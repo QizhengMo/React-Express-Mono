@@ -1,16 +1,24 @@
 import cors from "cors";
 import express from "express";
-
+import crypto from "crypto";
+import type { HelloResponse } from "contract";
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
-app.get("/api", (_req, res) => {
-  res.status(200).json({ message: "Hello from the server!" });
+function generateRandomString(length: number) {
+  return crypto.randomBytes(length).toString("hex").slice(0, length);
+}
+
+app.get("/api/hello", (_req, res) => {
+  const jsonRes: HelloResponse = {
+    message: "World " + generateRandomString(10),
+  };
+  res.status(200).json(jsonRes);
 });
 
 app.listen(PORT, () => {
