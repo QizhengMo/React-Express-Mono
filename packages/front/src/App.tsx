@@ -18,25 +18,26 @@ function App() {
   return (
     <>
       <div>
-        <a href="https://vite.dev" target="_blank">
+        <a href="#" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
+        <a href="#" target="_blank">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+      <p>Vite + React + Express + Typescript</p>
+      <h1>React Plain Old Stack</h1>
       <div className="card">
-        <button disabled={!loading} onClick={() => run}>
-          Remote Message is {msg}
+        <button disabled={loading} onClick={run}>
+          Click: Hello {msg}
         </button>
         <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
+          Edit <code>packages/frnt/src/App.tsx</code> and save to test HMR
+          <br />
+          Edit <code>packages/server/src/main.ts</code> and save to test Server
+          Hot Reload
         </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
