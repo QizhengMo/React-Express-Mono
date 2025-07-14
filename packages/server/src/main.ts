@@ -2,6 +2,10 @@ import cors from "cors";
 import express from "express";
 import type { HelloResponse } from "contract";
 const app = express();
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(express.json());
@@ -18,6 +22,8 @@ app.get("/api/hello", (_req, res) => {
     res.status(200).json(jsonRes);
   }, randomNum);
 });
+
+app.use(express.static(__dirname + "/frontDist"));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

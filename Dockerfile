@@ -12,15 +12,14 @@ FROM base AS build
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install
 RUN pnpm run build
 
-FROM pnpm-base AS arex
 
+FROM pnpm-base AS arex
 # runtime server
-COPY --from=build /app/packages/server/dist /app/serverDist
-COPY --from=build /app/packages/server/dist /app/serverDist
+COPY --from=build /app/packages/server/dist /app
 
 # frontend build product
 COPY --from=build /app/packages/front/dist /app/frontDist
 
-WORKDIR /app/serverDist
+WORKDIR /app
 EXPOSE 3000
 CMD [ "node", "./main.js"]
