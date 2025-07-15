@@ -13,13 +13,12 @@ app.use(express.urlencoded({ extended: true }));
 
 const PORT = 3000;
 
-app.get("/api/hello", (_req, res) => {
+app.get<void, HelloResponse>("/api/hello", (_req, res) => {
   const randomNum = Math.random() * 200;
   setTimeout(() => {
-    const jsonRes: HelloResponse = {
+    res.status(200).json({
       message: `World from the server in ${randomNum.toFixed(2)} ms`,
-    };
-    res.status(200).json(jsonRes);
+    });
   }, randomNum);
 });
 
